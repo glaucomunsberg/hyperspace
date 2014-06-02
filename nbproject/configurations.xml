@@ -102,8 +102,10 @@
         </df>
       </df>
       <in>Open.cpp</in>
-      <in>OpenMP.h</in>
+      <in>Open.h</in>
       <in>Principal.cpp</in>
+      <in>cilk.h</in>
+      <in>cilkPlus.cpp</in>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -136,9 +138,13 @@
       </makefileType>
       <item path="Open.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="OpenMP.h" ex="false" tool="3" flavor2="0">
+      <item path="Open.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Principal.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="cilk.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="cilkPlus.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="doc/Using Cilk Plus/src/cholesky/common/test_cholesky.cpp"
             ex="false"

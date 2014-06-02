@@ -257,8 +257,10 @@
         </df>
       </df>
       <in>Open.cpp</in>
-      <in>OpenMP.h</in>
+      <in>Open.h</in>
       <in>Principal.cpp</in>
+      <in>cilk.h</in>
+      <in>cilkPlus.cpp</in>
     </df>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

@@ -4,6 +4,6 @@ all:
 open: Open.cpp
 	g++ -g -Wall -o openmp -fopenmp Open.cpp
 cilk:
-	@echo Not implemented yet
+	g++ -g -Wall -o cilkplus cilkPlus.cpp
 clean: 
 	$(RM) count *.o *~
