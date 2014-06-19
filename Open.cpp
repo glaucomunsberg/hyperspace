@@ -13,7 +13,7 @@ Open::Open() {
     cout << "Start a Class OpenMP\n";
 }
 Open::~Open(){
-    cout << "Tchau :)\n";
+    cout << "Good bye :)\n";
 }
 int main(int argc, char *argv[])
 {

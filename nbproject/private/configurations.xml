@@ -4,211 +4,70 @@
     <df root="." name="0">
       <df name="doc">
         <df name="Using Cilk Plus">
-          <df name="config">
-          </df>
           <df name="src">
             <df name="cholesky">
-              <df name="build">
-              </df>
-              <df name="cilkplus">
-                <in>blas_cilk.h</in>
-                <in>gemm_cilk.h</in>
-                <in>potrf_cilk.h</in>
-                <in>syrk_cilk.h</in>
-                <in>trsm_cilk.h</in>
-              </df>
               <df name="common">
-                <in>FortranArray.h</in>
-                <in>blas_leaf.h</in>
                 <in>test_cholesky.cpp</in>
-              </df>
-              <df name="msvs">
               </df>
             </df>
             <df name="karatsuba">
-              <df name="build">
-              </df>
-              <df name="cilkplus">
-                <in>karatsuba_cilkplus.h</in>
-                <in>simple_mul_cilkplus.h</in>
-              </df>
               <df name="common">
-                <in>temp_space.h</in>
                 <in>test_karatsuba.cpp</in>
-              </df>
-              <df name="msvs">
-              </df>
-              <df name="serial">
-                <in>karatsuba_serial.h</in>
-                <in>simple_mul_serial.h</in>
-              </df>
-              <df name="tbb">
-                <in>karatsuba_tbb.h</in>
               </df>
             </df>
             <df name="kmeans">
-              <df name="build">
-              </df>
               <df name="cilkplus">
-                <in>elementwise_reducer.h</in>
                 <in>kmeans_cilk.cpp</in>
-                <in>kmeans_cilk.h</in>
               </df>
               <df name="common">
-                <in>kmeans.h</in>
                 <in>repair_empty_clusters.cpp</in>
-                <in>sum_and_count.h</in>
                 <in>test_kmeans.cpp</in>
-              </df>
-              <df name="msvs">
               </df>
               <df name="tbb">
                 <in>kmeans_tbb.cpp</in>
-                <in>kmeans_tbb.h</in>
-                <in>reduce_local_counts_to_global_count.h</in>
-                <in>reduce_local_sums_to_global_sum.h</in>
-                <in>reduce_min_ind.h</in>
-                <in>view.h</in>
               </df>
             </df>
             <df name="lattice">
-              <df name="build">
-              </df>
-              <df name="cilkplus">
-                <in>base_diamond.h</in>
-                <in>parallel_lattice.h</in>
-                <in>striped_lattice.h</in>
-              </df>
               <df name="common">
                 <in>test_lattice.cpp</in>
               </df>
-              <df name="msvs">
-              </df>
             </df>
             <df name="pipeline">
-              <df name="build">
-              </df>
               <df name="cilkplus">
-                <in>cilk_sps_pipeline.h</in>
-                <in>reducer_consume.h</in>
                 <in>test_reducer_consume.cpp</in>
               </df>
               <df name="common">
                 <in>test_pipeline.cpp</in>
               </df>
-              <df name="msvs">
-              </df>
-              <df name="serial">
-                <in>serial_pipeline.h</in>
-              </df>
-              <df name="tbb">
-                <in>tbb_sps_pipeline.h</in>
-              </df>
             </df>
             <df name="scan">
-              <df name="build">
-              </df>
-              <df name="cilkplus">
-                <in>cilk_scan.h</in>
-                <in>downsweep.h</in>
-                <in>pack.h</in>
-                <in>split.h</in>
-                <in>upsweep.h</in>
-              </df>
               <df name="common">
-                <in>pack.h</in>
                 <in>test_scan.cpp</in>
-              </df>
-              <df name="msvs">
-              </df>
-              <df name="openmp">
-                <in>openmp_scan.h</in>
-              </df>
-              <df name="serial">
-                <in>exclusive_scan.h</in>
-                <in>inclusive_scan.h</in>
-                <in>serial_pack.h</in>
-              </df>
-              <df name="tbb">
-                <in>pack.h</in>
               </df>
             </df>
             <df name="seismic">
-              <df name="build">
-              </df>
-              <df name="cilkplus">
-                <in>base_trapezoid.h</in>
-                <in>cilk_stencil.h</in>
-                <in>recursive_trapezoid.h</in>
-              </df>
               <df name="common">
                 <in>test_seismic.cpp</in>
               </df>
-              <df name="msvs">
-                <in>cilk_stencil.h</in>
-              </df>
-              <df name="serial">
-                <in>serial_stencil.h</in>
-              </df>
             </df>
             <df name="sort">
-              <df name="build">
-              </df>
-              <df name="cilkplus">
-                <in>bin_cilk.h</in>
-                <in>destructive_move.h</in>
-                <in>map_keys_to_bins_cilk.h</in>
-                <in>merge_cilk.h</in>
-                <in>merge_sort_cilk.h</in>
-                <in>quicksort_cilk_recursive.h</in>
-                <in>quicksort_cilk_semirecursive.h</in>
-                <in>repack_and_subsort_cilk.h</in>
-              </df>
               <df name="common">
-                <in>choose_number_of_bins.h</in>
-                <in>quicksort_util.h</in>
-                <in>sample_sort.h</in>
-                <in>sample_sort_util.h</in>
                 <in>test_sort.cpp</in>
               </df>
-              <df name="msvs">
-              </df>
-              <df name="openmp">
-                <in>merge_openmp.h</in>
-                <in>merge_sort_openmp.h</in>
-              </df>
-              <df name="serial">
-                <in>serial_merge.h</in>
-              </df>
-              <df name="tbb">
-                <in>bin_tbb.h</in>
-                <in>map_keys_to_bins_tbb.h</in>
-                <in>merge_sort_tbb.h</in>
-                <in>merge_tbb.h</in>
-                <in>quicksort_tbb_task.h</in>
-                <in>quicksort_tbb_taskgroup.h</in>
-                <in>repack_and_subsort_tbb.h</in>
-              </df>
             </df>
-          </df>
-          <df name="tools">
           </df>
         </df>
         <df name="Using OpenMP">
           <df name="chapter3">
             <in>fig3.10-mxv-omp.c</in>
-            <in>fig3.11-mxv-omp.f90</in>
             <in>fig3.12-conditional-comp.c</in>
-            <in>fig3.16-conditional-comp.f90</in>
             <in>fig3.5-mxv-serial.c</in>
-            <in>fig3.6-mxv-serial.f90</in>
           </df>
           <df name="chapter4">
             <in>fig4.10-for-loop.c</in>
             <in>fig4.12-two-for-loops.c</in>
             <in>fig4.16-sections.c</in>
             <in>fig4.22-single.c</in>
-            <in>fig4.26-workshare.f90</in>
             <in>fig4.3-parallel-region.c</in>
             <in>fig4.31-shared-clause.c</in>
             <in>fig4.32-private-clause.c</in>
@@ -223,14 +82,11 @@
             <in>fig4.58-critical-region-minval.c</in>
             <in>fig4.61-atomic.c</in>
             <in>fig4.62-atomic-func.c</in>
-            <in>fig4.65-locks.f90</in>
             <in>fig4.68-master.c</in>
             <in>fig4.70-if-clause.c</in>
             <in>fig4.72-num-threads-clause.c</in>
             <in>fig4.74-ordered.c</in>
             <in>fig4.77-reduction.c</in>
-            <in>fig4.79-reduction-md.f90</in>
-            <in>fig4.84-array-reduction.f90</in>
             <in>fig4.85-nested-parallel.c</in>
             <in>fig4.87-nested-parallel-mod.c</in>
             <in>fig4.96-global-data.c</in>
@@ -241,26 +97,15 @@
           </df>
           <df name="chapter7">
             <in>fig7.11-nested-parallel.c</in>
-            <in>fig7.20-flush.f90</in>
             <in>fig7.7-first-lastprivate.c</in>
-          </df>
-          <df name="include">
-            <in>gnu-compilers.h</in>
-            <in>ibm-compilers.h</in>
-            <in>intel-compilers-linux.h</in>
-            <in>intel-compilers-macos.h</in>
-            <in>pgi-compilers.h</in>
-            <in>sun-studio-compilers.h</in>
-          </df>
-          <df name="UsersGuide">
           </df>
         </df>
       </df>
       <in>Open.cpp</in>
       <in>Open.h</in>
       <in>Principal.cpp</in>
-      <in>cilk.h</in>
       <in>cilkPlus.cpp</in>
+      <in>cilkPlus.h</in>
     </df>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -282,21 +127,6 @@
         </compilecommandpicklist>
         <compilecommand>${AUTO_COMPILE}</compilecommand>
       </compile>
-      <dbx_gdbdebugger version="1">
-        <gdb_pathmaps>
-        </gdb_pathmaps>
-        <gdb_interceptlist>
-          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
-        </gdb_interceptlist>
-        <gdb_options>
-          <DebugOptions>
-          </DebugOptions>
-        </gdb_options>
-        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
-      </dbx_gdbdebugger>
-      <nativedebugger version="1">
-        <engine>gdb</engine>
-      </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>

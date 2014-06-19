@@ -104,7 +104,6 @@
       <in>Open.cpp</in>
       <in>Open.h</in>
       <in>Principal.cpp</in>
-      <in>cilk.h</in>
       <in>cilkPlus.cpp</in>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -141,8 +140,6 @@
       <item path="Open.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Principal.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="cilk.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="cilkPlus.cpp" ex="false" tool="1" flavor2="0">
       </item>

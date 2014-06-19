@@ -10,7 +10,6 @@
 #ifndef __cilk
 #include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk_stub.h>
 #include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk.h>
-#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/reducer.h>
 #include <list>
 #include "cilkPlus.h"
 
