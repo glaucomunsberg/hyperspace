@@ -21,10 +21,10 @@ void Graph::inicialize(){
 		}
 	}
 
-void Graph::openFile(string const &fileName){
+void Graph::openFile(string fileName){
 		
 		string line;
-		ifstream theFile (fileName);
+		ifstream theFile (fileName.c_str());
 		if(theFile.is_open()){
 			while ( getline (theFile,line) )
 			    {
@@ -41,11 +41,9 @@ void Graph::setSize(int size){
 	}
 Graph::Graph(){}
 Graph::~Graph(){
-
 		delete[] matrix;
-	}
-
-
+		delete &sizeGraph;
+	};
 
 class GraphTeste: public Graph{
 public:
@@ -53,7 +51,9 @@ public:
 	{
 
 	}
-	~GraphTeste(){}
+	~GraphTeste(){
+		
+	}
 	void insertAdj(int adj1, int adj2);
 	void removeAdj(int adj1, int adj2);
 	void existAdj(int adj1, int adj2);
@@ -68,9 +68,17 @@ void GraphTeste::existAdj(int adj1, int adj2){
 	
 }
 
-int main(int argc, char** argv) {
-	GraphTeste *graph;
+int main(int argc, char* argv[]) {
+	Graph *graph;
 	graph = new GraphTeste();
-
+	graph->setSize(2);
+	graph->inicialize();
+	if(argc < 1){
+		graph->openFile("GraphData.txt");
+	}else{
+		std::string file = argv[1];
+		graph->openFile(file);
+	}
+	
 	return 0;
 }

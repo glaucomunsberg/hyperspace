@@ -6,15 +6,17 @@
 using namespace std;
 class Graph{
 
-protected:
-	static int **matrix;
-	static int sizeGraph;
-	void inicialize();
-	void openFile(string const &fileName);
-	void setSize(int size);
 public:
+	
+	void inicialize();
+	void openFile(string fileName);
+	void setSize(int size);
+
 	Graph();
 	~Graph();
+	int **matrix;
+	int sizeGraph;
+
 	virtual void insertAdj(int adj1, int adj2)=0;
 	virtual void removeAdj(int adj1, int adj2)=0;
 	virtual void existAdj(int adj1, int adj2)=0;
