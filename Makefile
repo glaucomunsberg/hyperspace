@@ -6,6 +6,6 @@ open: Open.cpp
 cilk:
 	g++ -g -Wall -o cilkplus cilkPlus.cpp
 graph:
-	g++ -g -Wall -o graph graph.cpp
+	g++ -g -Wall -o graph Graph.cpp
 clean: 
 	$(RM) count *.o *~
