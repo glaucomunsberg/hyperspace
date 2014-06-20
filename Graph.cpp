@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <exception>
+#include <stdlib.h>
 #include "Graph.h"
 
 using namespace std;
@@ -24,13 +26,26 @@ void Graph::inicialize(){
 void Graph::openFile(string fileName){
 		
 		string line;
+		int numOfNodos;
 		ifstream theFile (fileName.c_str());
+		
 		if(theFile.is_open()){
-			while ( getline (theFile,line) )
-			    {
-			      cout << line << '\n';
-			    }
-			    theFile.close();
+
+			theFile >> numOfNodos;
+			setSize(numOfNodos);
+			inicialize();
+
+			while ( getline (theFile,line) ){
+
+				if(line == "\n"){
+					cout << "nova linha\n";
+				}else{
+					cout << line << '\n';
+				}
+				
+			}
+
+			theFile.close();
 		}else{
 			cout << "It's not possible open the file.\n";
 		}

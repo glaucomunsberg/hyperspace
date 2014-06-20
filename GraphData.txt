@@ -1,16 +1,3 @@
-#-----------------------------------------------
-# This file defines a graph.  The data defining
-# each node is in the following format:
-# NodeID
-# DataString
-# NumLinks
-# Link1
-# Link2
-#  ...
-# LinkN
-# The first data line gives the number of nodes
-#  in the graph
-#-----------------------------------------------
 8
 
 0
