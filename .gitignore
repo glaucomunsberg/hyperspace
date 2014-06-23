@@ -3,7 +3,8 @@
 *.lo
 *.o
 *.obj
-
+graph
+graph.dSYM/
 # Compiled Dynamic libraries
 *.so
 *.dylib

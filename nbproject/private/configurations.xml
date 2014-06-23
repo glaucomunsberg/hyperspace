@@ -101,11 +101,33 @@
           </df>
         </df>
       </df>
+      <df name="docs">
+      </df>
+      <df name="graph.dSYM">
+        <df name="Contents">
+          <df name="Resources">
+            <df name="DWARF">
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="olders">
+        <in>CilkGraph.cpp</in>
+        <in>CilkGraph.h</in>
+        <in>Principal.cpp</in>
+        <in>_Open.cpp</in>
+        <in>_Open.h</in>
+        <in>_cilkPlus.cpp</in>
+        <in>_cilkPlus.h</in>
+        <in>_graph.cpp</in>
+        <in>_graph.h</in>
+      </df>
+      <in>Graph.cpp</in>
+      <in>Graph.h</in>
       <in>Open.cpp</in>
       <in>Open.h</in>
       <in>Principal.cpp</in>
       <in>cilkPlus.cpp</in>
-      <in>cilkPlus.h</in>
     </df>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -127,6 +149,21 @@
         </compilecommandpicklist>
         <compilecommand>${AUTO_COMPILE}</compilecommand>
       </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>

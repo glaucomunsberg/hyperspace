@@ -3,6 +3,8 @@
 #include <fstream>
 #include <exception>
 #include <stdlib.h>
+#include <stdio.h>      /* printf, fgets */
+#include <stdlib.h>     /* atoi */
 #include "Graph.h"
 
 using namespace std;
@@ -26,7 +28,10 @@ void Graph::inicialize(){
 void Graph::openFile(string fileName){
 		
 		string line;
-		int numOfNodos;
+		int numOfNodos, nodo1, nodo2;
+		bool inseriuNodo1 = false;
+		bool nextNodo1 = false;
+		bool nextNodo2 = false;
 		ifstream theFile (fileName.c_str());
 		
 		if(theFile.is_open()){
@@ -36,11 +41,36 @@ void Graph::openFile(string fileName){
 			inicialize();
 
 			while ( getline (theFile,line) ){
+				
+				if(line == ""){
+					
+					nextNodo1 = true;
+					nextNodo2 = false;
+					inseriuNodo1 = false;
+				}
 
-				if(line == "\n"){
-					cout << "nova linha\n";
+				if(nextNodo1 == true && line != "" ){
+					
+					nodo1 = atoi(line.c_str());
+					nextNodo1 = false;
+					nextNodo2 = true;
+					inseriuNodo1 = true;
+				}
+
+				if(nextNodo2 == true && line != "" && inseriuNodo1 == false  ){
+					
+					nodo2 = atoi(line.c_str());
+					nextNodo1 = false;
+					inseriuNodo1 = false;
+					cout << "[" << nodo1 << "," << nodo2 << "]" << endl;
+					matrix[nodo1][nodo2] = 1;
+					
 				}else{
-					cout << line << '\n';
+
+					if(inseriuNodo1){
+
+						inseriuNodo1 = false;
+					}
 				}
 				
 			}
@@ -54,6 +84,9 @@ void Graph::openFile(string fileName){
 void Graph::setSize(int size){
 		sizeGraph = size;
 	}
+int Graph::getSize(){
+	return sizeGraph;
+}
 Graph::Graph(){}
 Graph::~Graph(){
 		delete[] matrix;
@@ -72,6 +105,7 @@ public:
 	void insertAdj(int adj1, int adj2);
 	void removeAdj(int adj1, int adj2);
 	void existAdj(int adj1, int adj2);
+	void printMatrix();
 };
 void GraphTeste::insertAdj(int adj1, int ajd2){
 	
@@ -81,6 +115,13 @@ void GraphTeste::removeAdj(int adj1, int ajd2){
 }
 void GraphTeste::existAdj(int adj1, int adj2){
 	
+}
+void GraphTeste::printMatrix(){
+	for(int a=0; a < getSize(); a++){
+		for(int b=0; b<getSize();b++){
+			cout << a << " " << b << " = " << matrix[a][b] << endl;
+		}
+	}
 }
 
 int main(int argc, char* argv[]) {
@@ -94,6 +135,7 @@ int main(int argc, char* argv[]) {
 		std::string file = argv[1];
 		graph->openFile(file);
 	}
+	graph->printMatrix();
 	
 	return 0;
 }
