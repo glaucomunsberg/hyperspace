@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>      /* printf, fgets */
 #include <stdlib.h>     /* atoi */
-#include "Graph.h"
+#include "Graph.hpp"
 
 using namespace std;
 
@@ -62,8 +62,10 @@ void Graph::openFile(string fileName){
 					nodo2 = atoi(line.c_str());
 					nextNodo1 = false;
 					inseriuNodo1 = false;
-					cout << "[" << nodo1 << "," << nodo2 << "]" << endl;
-					matrix[nodo1][nodo2] = 1;
+					if(nodo1 <= getSize() && nodo2 <= getSize()){
+						insertAdj(nodo1,nodo2);	
+					}
+					
 					
 				}else{
 
@@ -104,23 +106,43 @@ public:
 	}
 	void insertAdj(int adj1, int adj2);
 	void removeAdj(int adj1, int adj2);
-	void existAdj(int adj1, int adj2);
+	bool existAdj(int adj1, int adj2);
 	void printMatrix();
 };
-void GraphTeste::insertAdj(int adj1, int ajd2){
-	
+void GraphTeste::insertAdj(int adj1, int adj2){
+	matrix[adj1][adj2]++;
 }
-void GraphTeste::removeAdj(int adj1, int ajd2){
-	
+void GraphTeste::removeAdj(int adj1, int adj2){
+
+	if(matrix[adj1,adj2] > 0){
+		matrix[adj1][adj2]--;
+	}
 }
-void GraphTeste::existAdj(int adj1, int adj2){
-	
+bool GraphTeste::existAdj(int adj1, int adj2){
+	if(matrix[adj1,adj2] > 0){
+		return true;
+	}else{
+		return false;
+	}
 }
 void GraphTeste::printMatrix(){
+
+	cout << "Nodos:" << endl;
+	cout << "\t";
 	for(int a=0; a < getSize(); a++){
-		for(int b=0; b<getSize();b++){
-			cout << a << " " << b << " = " << matrix[a][b] << endl;
+		cout <<a<<"\t";
+	}
+	cout << endl;
+	for(int a=0; a < getSize(); a++){
+		cout << a << "\t";
+		for(int b=0; b < getSize();b++){
+			if(matrix[a][b] != 0){
+				cout << "●\t";
+			}else{
+				cout << "\t";
+			}
 		}
+		cout << endl;
 	}
 }
 
@@ -136,6 +158,11 @@ int main(int argc, char* argv[]) {
 		graph->openFile(file);
 	}
 	graph->printMatrix();
-	
+	if(graph->existAdj(0,1)){
+		cout << "existe 0,1" << endl;
+	}
+	if(graph->existAdj(1,0)){
+		cout << "não existe 1,0" << endl;
+	}
 	return 0;
 }

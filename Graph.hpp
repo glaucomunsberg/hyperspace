@@ -19,7 +19,7 @@ public:
 
 	virtual void insertAdj(int adj1, int adj2)=0;
 	virtual void removeAdj(int adj1, int adj2)=0;
-	virtual void existAdj(int adj1, int adj2)=0;
+	virtual bool existAdj(int adj1, int adj2)=0;
 	virtual void printMatrix()=0;
 	int getSize();
 
