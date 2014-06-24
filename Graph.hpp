@@ -12,7 +12,7 @@ struct edge
 	int value;
 };
 
-struct less_than_key
+struct lessThanKey
 {
     inline bool operator() (const edge& struct1, const edge& struct2)
     {
@@ -22,18 +22,16 @@ struct less_than_key
 
 class Graph{
 
-public:
+protected:
 	vector<edge> edges;
 	int **matrix;
 	int sizeGraph;
 
+public:
 	Graph();
 	~Graph();
 	
-
-	
 	int getSize();
-
 	void printMatrix();
 	void inicialize();
 	void openFile(string fileName);
