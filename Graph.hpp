@@ -2,27 +2,36 @@
 #define	GRAPH_H
 
 #include <string>
+#include <vector>
 
 using namespace std;
+struct edges
+{
+	int nodo1;
+	int nodo2;
+	int value;
+};
 class Graph{
 
 public:
+	vector<edges> edges;
+	int **matrix;
+	int sizeGraph;
+
+	Graph();
+	~Graph();
 	
+
+	
+	int getSize();
+	void printMatrix();
 	void inicialize();
 	void openFile(string fileName);
 	void setSize(int size);
 
-	Graph();
-	~Graph();
-	int **matrix;
-	int sizeGraph;
-
-	virtual void insertAdj(int adj1, int adj2)=0;
-	virtual void removeAdj(int adj1, int adj2)=0;
-	virtual bool existAdj(int adj1, int adj2)=0;
-	virtual void printMatrix()=0;
-	int getSize();
-
+	virtual void insertEdges(int adj1, int adj2)=0;
+	virtual void removeEdges(int adj1, int adj2)=0;
+	virtual bool existEdges(int adj1, int adj2)=0;
 };
 
 
