@@ -3,18 +3,18 @@
 #include <fstream>
 #include <exception>
 #include <stdlib.h>
-#include <stdio.h>      /* printf, fgets */
+#include <stdio.h> 
 #include <stdlib.h>     /* atoi */
 #include "Graph.hpp"
 
 using namespace std;
-
 
 Graph::Graph(){}
 Graph::~Graph(){
 	delete[] matrix;
 	delete &sizeGraph;
 };
+
 void Graph::inicialize(){
 		
 	matrix = new int *[sizeGraph];
@@ -30,12 +30,15 @@ void Graph::inicialize(){
 		}
 	}
 }
+
 void Graph::setSize(int size){
-		sizeGraph = size;
-	}
+	sizeGraph = size;
+}
+
 int Graph::getSize(){
 	return sizeGraph;
 }
+
 void Graph::printMatrix(){
 	cout << "Nodos:" << endl;
 	cout << "\t";
@@ -55,6 +58,7 @@ void Graph::printMatrix(){
 		cout << endl;
 	}
 } 
+
 void Graph::openFile(string fileName){	
 	string line;
 	int numOfNodos, nodo1, nodo2;

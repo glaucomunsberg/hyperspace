@@ -5,6 +5,8 @@
 *.obj
 graph
 graph.dSYM/
+graphCilk
+graphCilk.dSYM/
 # Compiled Dynamic libraries
 *.so
 *.dylib
