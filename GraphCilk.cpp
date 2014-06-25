@@ -26,12 +26,12 @@ void GraphCilk::sortedEdges(){
 	for(int a =0;a < getSize(); a++){
 		for(int b =0; b < getSize(); b++){
 			if(matrix[a][b] != 0){
-				edge edgeCurrent = {a, b, matrix[a][b]};
-				edges.push_back(edgeCurrent);
+				Adjacency adjacencyCurrent = {a, b, matrix[a][b]};
+				adjacencies.push_back(adjacencyCurrent);
 			}
 		}
 	}
-	std::sort(edges.begin(), edges.end(), lessThanKey());
+	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
 	//cout << "ordem" << endl;
 	//for(int a=0;a < edges.size(); a++){
 	//	 cout << "[" << edges[a].nodo1 << "," << edges[a].nodo2 << "]=" << edges[a].value << endl;

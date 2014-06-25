@@ -5,7 +5,7 @@
 #include <vector>
 
 using namespace std;
-struct edge
+struct Adjacency
 {
 	int nodo1;
 	int nodo2;
@@ -14,7 +14,7 @@ struct edge
 
 struct lessThanKey
 {
-    inline bool operator() (const edge& struct1, const edge& struct2)
+    inline bool operator() (const Adjacency& struct1, const Adjacency& struct2)
     {
         return (struct1.value < struct2.value);
     }
@@ -23,7 +23,7 @@ struct lessThanKey
 class Graph{
 
 protected:
-	vector<edge> edges;
+	vector<Adjacency> adjacencies;
 	int **matrix;
 	int sizeGraph;
 
