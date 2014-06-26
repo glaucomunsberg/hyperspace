@@ -5,11 +5,29 @@
 #include <vector>
 
 using namespace std;
-struct Adjacency
+class Adjacency
 {
+public:
 	int nodo1;
 	int nodo2;
 	int value;
+	bool ative;
+	Adjacency(int nod1, int nod2, int val){
+		nodo1 = nod1;
+		nodo2 = nod2;
+		value = val;
+		ative = false;
+	}
+};
+
+class Nodo{
+public:
+	int value;
+	int tree;
+	Nodo(int val,int arv){
+		value = val;
+		tree = arv;
+	}
 };
 
 struct lessThanKey
@@ -24,6 +42,7 @@ class Graph{
 
 protected:
 	vector<Adjacency> adjacencies;
+	vector<Nodo> edges;
 	int **matrix;
 	int sizeGraph;
 

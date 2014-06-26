@@ -23,19 +23,53 @@ void GraphCilk::removeEdges(int adj1, int adj2){
 }
 
 void GraphCilk::sortedEdges(){
+	
 	for(int a =0;a < getSize(); a++){
+		edges.push_back(Nodo(a,a));
 		for(int b =0; b < getSize(); b++){
 			if(matrix[a][b] != 0){
-				Adjacency adjacencyCurrent = {a, b, matrix[a][b]};
-				adjacencies.push_back(adjacencyCurrent);
+				adjacencies.push_back(Adjacency(a,b,matrix[a][b]));
 			}
 		}
 	}
 	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
 	//cout << "ordem" << endl;
-	//for(int a=0;a < edges.size(); a++){
-	//	 cout << "[" << edges[a].nodo1 << "," << edges[a].nodo2 << "]=" << edges[a].value << endl;
+	//for(int a=0;a < adjacencies.size(); a++){
+	//	 cout << "[" << adjacencies[a].nodo1 << "," << adjacencies[a].nodo2 << "]=" << adjacencies[a].value << endl;
 	//}
+	
+
+	//cout << "ordem 2" << endl;
+
+	Adjacency *tmpAdjacency;
+	vector<Adjacency> minimun;
+	int lastTree;
+	while(!adjacencies.empty()){
+		
+		tmpAdjacency = &adjacencies.at(0);
+		//cout << " Aresta: [" << tmpAdjacency->nodo1 << "," << tmpAdjacency->nodo2 << "]=" << tmpAdjacency->value << endl;
+		
+		if(edges[tmpAdjacency->nodo1].tree != edges[tmpAdjacency->nodo2].tree){
+			minimun.push_back(*tmpAdjacency);
+			lastTree = tmpAdjacency->nodo1;
+			//cout << "Difere. Arvore: [" << edges[tmpAdjacency->nodo1].tree <<"," << edges[tmpAdjacency->nodo2].tree << "]" << endl;
+			
+			for(int a=0; a < edges.size(); a++){
+				if(edges[a].tree == edges[tmpAdjacency->nodo2].tree){
+					edges[a].tree = edges[tmpAdjacency->nodo1].tree;
+				}
+			}
+
+		}
+
+		adjacencies.erase(adjacencies.begin());
+
+	}
+	cout << "ativos" << endl;
+
+	for(int a=0; a < minimun.size();a++ ){
+		cout << "Aresta: [" << minimun[a].nodo1 <<"," << minimun[a].nodo2 << "]" << endl;
+	}
 }
 
 bool GraphCilk::existEdges(int adj1, int adj2){
