@@ -5,26 +5,31 @@
 #include <vector>
 
 using namespace std;
+
 class Adjacency
 {
 public:
-	int nodo1;
-	int nodo2;
+	int node1;
+	int node2;
 	int value;
 	bool ative;
+
 	Adjacency(int nod1, int nod2, int val){
-		nodo1 = nod1;
-		nodo2 = nod2;
+
+		node1 = nod1;
+		node2 = nod2;
 		value = val;
 		ative = false;
 	}
 };
 
-class Nodo{
+class Node{
 public:
 	int value;
 	int tree;
-	Nodo(int val,int arv){
+
+	Node(int val,int arv){
+
 		value = val;
 		tree = arv;
 	}
@@ -42,7 +47,8 @@ class Graph{
 
 protected:
 	vector<Adjacency> adjacencies;
-	vector<Nodo> edges;
+	vector<Adjacency> minimumAdjacencies;
+	vector<Node> edges;
 	int **matrix;
 	int sizeGraph;
 
@@ -52,16 +58,14 @@ public:
 	
 	int getSize();
 	void printMatrix();
+	void printMinimumWeightSpanningTree();
 	void inicialize();
 	void openFile(string fileName);
 	void setSize(int size);
 
+	virtual void minimumWeightSpanningTree()=0;
 	virtual void insertEdges(int adj1, int adj2)=0;	
 	virtual void removeEdges(int adj1, int adj2)=0;
-	virtual void sortedEdges()=0;
-	virtual bool existEdges(int adj1, int adj2)=0;
-
 };
-
 
 #endif	/* GRAPH_H */
