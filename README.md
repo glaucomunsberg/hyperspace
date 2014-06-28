@@ -83,22 +83,22 @@
 #
 #	3.1 Minimum Requests Install
 #		C++98
-#		Cilk Library
+#		Cilk Library (Intel Composer XE 2013 SP1)
 #		OpenMP Library
 #		
 #	3.2 Compilation
 #		The compilation is simple, you need use make command with one the
 #		libraries or using the default graph without parallel mode.
 #
-#		$ make <cilk|open>
+#		$ make <cilk|open> <set_num_threads>
 #
 #	3.3 Executation
 #
 #		Look at the compilation way to see the out file and pass through
 #		parameter the file whit graph. Look an example to Cilk Graph and 
-#		the file GraphData.txt whit an example graph:
+#		the file GraphData.txt whit an example graph and 5 threads:
 #
-#		$ ./graphCilk GraphData.txt
+#		$ ./graphCilk GraphData.txt 5
 #
 #		Atention: if none file is passed by parameter is used the default
 #		example.
@@ -117,6 +117,7 @@
 #		
 #		Atention: Note that if in a node have two lines adjacency to the
 # 		same other node, means that they  have the weight 2.
+#
 ##########################################################################
 # 4. Results
 ##########################################################################

@@ -10,6 +10,7 @@
 #include "Graph.hpp"
 #include "GraphCilk.hpp"
 #include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk_stub.h>
+#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk_api.h>
 #include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk.h>
 
 using namespace std;
@@ -71,16 +72,32 @@ void GraphCilk::checkAdjacencies(){
 }
 
 int main(int argc, char* argv[]) {
+	
+	if(argc > 2){
+		__cilkrts_end_cilk();  
+		__cilkrts_set_param("nworkers", argv[2]);
+		cout << "Graph->CilkGrap()" << endl << "Threads:" << argv[2] << endl;
+	}else{
+		cout << "Graph->CilkGrap()" << endl << "Threads:" <<  __cilkrts_get_nworkers() << endl;
+	}
+
 	Graph *graph;
 	graph = new GraphCilk();
+	std::string file = "";
+
+
 	graph->setSize(2);
 	graph->inicialize();
-	if(argc < 1){
-		graph->openFile("GraphData.txt");
+
+	if(argc <= 1){
+		file = "GraphData.txt";
 	}else{
-		std::string file = argv[1];
-		graph->openFile(file);
+		file = argv[1];
+		
 	}
+	graph->openFile(file);
+	
+
 	graph->printMatrix();
 	graph->minimumWeightSpanningTree();
 	graph->printMinimumWeightSpanningTree();

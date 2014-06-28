@@ -7,6 +7,9 @@ graph
 graph.dSYM/
 graphCilk
 graphCilk.dSYM/
+graphOpen
+graphOpen.dSYM
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
