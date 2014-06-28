@@ -83,7 +83,7 @@
 #
 #	3.1 Minimum Requests Install
 #		C++98
-#		Cilk Library (Intel Composer XE 2013 SP1)
+#		Cilk Library 	(Intel Composer XE 2013 SP1)
 #		OpenMP Library
 #		
 #	3.2 Compilation
