@@ -13,5 +13,6 @@ public:
 	void insertEdges(int adj1, int adj2);
 	void removeEdges(int adj1, int adj2);
 	void minimumWeightSpanningTree();
+	void checkAdjacencies();
 };
 #endif	/* GRAPHOPEN_H */

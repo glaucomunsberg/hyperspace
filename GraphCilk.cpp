@@ -76,9 +76,9 @@ int main(int argc, char* argv[]) {
 	if(argc > 2){
 		__cilkrts_end_cilk();  
 		__cilkrts_set_param("nworkers", argv[2]);
-		cout << "Graph->CilkGrap()" << endl << "Threads:" << argv[2] << endl;
+		cout << "Graph->GraphCilk()" << endl << "Threads:" << argv[2] << endl;
 	}else{
-		cout << "Graph->CilkGrap()" << endl << "Threads:" <<  __cilkrts_get_nworkers() << endl;
+		cout << "Graph->GraphCilk()" << endl << "Threads:" <<  __cilkrts_get_nworkers() << endl;
 	}
 
 	Graph *graph;
