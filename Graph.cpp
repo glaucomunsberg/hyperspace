@@ -71,7 +71,8 @@ void Graph::printMinimumWeightSpanningTree(){
 	}else{
 
 		cout << "Minimum Spanning Tree" << endl;
-		for(int a=0; a < minimumAdjacencies.size(); a++){
+		
+		for(int a=0; a < (int)minimumAdjacencies.size(); a++){
 
 			cout << "[" <<minimumAdjacencies[a].node1 << "," << minimumAdjacencies[a].node2 << "]=" << minimumAdjacencies[a].value << endl;
 		}

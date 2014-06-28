@@ -8,15 +8,15 @@
 #include <stdlib.h>     /* atoi */
 #include <string>
 #include "Graph.hpp"
-#include "GraphCilk.hpp"
+#include "GraphOpen.hpp"
 
 using namespace std;
 
-void GraphCilk::insertEdges(int adj1, int adj2){
+void GraphOpen::insertEdges(int adj1, int adj2){
 	matrix[adj1][adj2]++;
 }
 
-void GraphCilk::removeEdges(int adj1, int adj2){
+void GraphOpen::removeEdges(int adj1, int adj2){
 
 	if(matrix[adj1][adj2] > 0){
 
@@ -24,7 +24,7 @@ void GraphCilk::removeEdges(int adj1, int adj2){
 	}
 }
 
-void GraphCilk::minimumWeightSpanningTree(){
+void GraphOpen::minimumWeightSpanningTree(){
 	
 	for(int a =0;a < getSize(); a++){
 		
@@ -49,8 +49,8 @@ void GraphCilk::minimumWeightSpanningTree(){
 		if(edges[tmpAdjacency->node1].tree != edges[tmpAdjacency->node2].tree){
 			
 			minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
-		
-			for(int a=0; a < (int) edges.size(); a++){
+
+			for(int a=0; a < (int)edges.size(); a++){
 				
 				if(edges[a].tree == edges[tmpAdjacency->node2].tree){
 					edges[a].tree = edges[tmpAdjacency->node1].tree;
@@ -65,7 +65,7 @@ void GraphCilk::minimumWeightSpanningTree(){
 
 int main(int argc, char* argv[]) {
 	Graph *graph;
-	graph = new GraphCilk();
+	graph = new GraphOpen();
 	graph->setSize(2);
 	graph->inicialize();
 	if(argc < 1){
