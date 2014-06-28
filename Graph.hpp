@@ -12,14 +12,11 @@ public:
 	int node1;
 	int node2;
 	int value;
-	bool ative;
-
 	Adjacency(int nod1, int nod2, int val){
 
 		node1 = nod1;
 		node2 = nod2;
 		value = val;
-		ative = false;
 	}
 };
 

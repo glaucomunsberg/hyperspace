@@ -40,7 +40,6 @@ void GraphCilk::minimumWeightSpanningTree(){
 	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
 	Adjacency *tmpAdjacency;
 	
-	int lastTree;
 	
 	while(!adjacencies.empty()){
 		
@@ -48,10 +47,10 @@ void GraphCilk::minimumWeightSpanningTree(){
 		
 		if(edges[tmpAdjacency->node1].tree != edges[tmpAdjacency->node2].tree){
 			
-			minimumAdjacencies.push_back(*tmpAdjacency);
-			lastTree = tmpAdjacency->node1;
-			
+			minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
+		
 			for(int a=0; a < edges.size(); a++){
+				
 				if(edges[a].tree == edges[tmpAdjacency->node2].tree){
 					edges[a].tree = edges[tmpAdjacency->node1].tree;
 				}
@@ -76,5 +75,6 @@ int main(int argc, char* argv[]) {
 	}
 	graph->printMatrix();
 	graph->minimumWeightSpanningTree();
+	graph->printMinimumWeightSpanningTree();
 	return 0;
 }

@@ -63,25 +63,17 @@ void Graph::printMatrix(){
 } 
 
 void Graph::printMinimumWeightSpanningTree(){
+
+
 	if(minimumAdjacencies.empty()){
+
 		cout << "Minimum Spanning Tree not implemented yeat." << endl;
 	}else{
-		cout << "Minimum Weight Spanning Tree" << endl;
-		cout << "\t";
-		for(int a=0; a < getSize(); a++){
-			cout <<a<<"\t";
-		}
-		cout << endl;
-		for(int a=0; a < getSize(); a++){
-			cout << a << "\t";
-			for(int b=0; b < getSize();b++){
-				if(matrix[a][b] != 0){
-					cout << "●->" << matrix[a][b] << "\t" ;
-				}else{
-					cout << "\t";
-				}
-			}
-			cout << endl << endl;
+
+		cout << "Minimum Spanning Tree" << endl;
+		for(int a=0; a < minimumAdjacencies.size(); a++){
+
+			cout << "[" <<minimumAdjacencies[a].node1 << "," << minimumAdjacencies[a].node2 << "]=" << minimumAdjacencies[a].value << endl;
 		}
 	}
 }
