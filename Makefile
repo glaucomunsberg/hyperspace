@@ -5,7 +5,7 @@ open:
 	g++ -g -Wall -o graphOpen GraphOpen.cpp Graph.cpp
 
 cilk:
-	g++ -g -Wall -o graphCilk GraphCilk.cpp Graph.cpp
+	g++ -pthread -std=c++0x GraphCilk.cpp Graph.cpp
 
 graph:
 	g++ -g -Wall -o graph Graph.cpp

@@ -9,6 +9,8 @@
 #include <string>
 #include "Graph.hpp"
 #include "GraphCilk.hpp"
+#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk_stub.h>
+#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk.h>
 
 using namespace std;
 
@@ -29,39 +31,44 @@ void GraphCilk::minimumWeightSpanningTree(){
 	for(int a =0;a < getSize(); a++){
 		
 		edges.push_back(Node(a,a));
-		for(int b =0; b < getSize(); b++){
+		cilk_for(int b =0; b < getSize(); b++){
 			
 			if(matrix[a][b] != 0){
-				
 				adjacencies.push_back(Adjacency(a,b,matrix[a][b]));
 			}
 		}
 	}
 
 	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
-	Adjacency *tmpAdjacency;
+	
 	
 	
 	while(!adjacencies.empty()){
 		
-		tmpAdjacency = &adjacencies.at(0);
+		cilk_spawn checkAdjacencies();
+	}
+	cilk_sync;
+}
+void GraphCilk::checkAdjacencies(){
+	GraphCilk::mtx.lock();
+	Adjacency *tmpAdjacency;
+	tmpAdjacency = &adjacencies.at(0);
 		
-		if(edges[tmpAdjacency->node1].tree != edges[tmpAdjacency->node2].tree){
+	if(edges[tmpAdjacency->node1].tree != edges[tmpAdjacency->node2].tree){
+		
+		minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
+	
+		for(int a=0; a < (int) edges.size(); a++){
 			
-			minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
-		
-			for(int a=0; a < (int) edges.size(); a++){
-				
-				if(edges[a].tree == edges[tmpAdjacency->node2].tree){
-					edges[a].tree = edges[tmpAdjacency->node1].tree;
-				}
+			if(edges[a].tree == edges[tmpAdjacency->node2].tree){
+				edges[a].tree = edges[tmpAdjacency->node1].tree;
 			}
 		}
-
-		adjacencies.erase(adjacencies.begin());
 	}
-}
 
+	adjacencies.erase(adjacencies.begin());
+	GraphCilk::mtx.unlock();
+}
 
 int main(int argc, char* argv[]) {
 	Graph *graph;
