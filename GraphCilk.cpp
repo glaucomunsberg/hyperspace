@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include <string>
 #include <fstream>
 #include <exception>
@@ -52,16 +51,17 @@ void GraphCilk::minimumWeightSpanningTree(){
 }
 void GraphCilk::checkAdjacencies(){
 	GraphCilk::mtx.lock();
+	int change;
 	Adjacency *tmpAdjacency;
 	tmpAdjacency = &adjacencies.at(0);
 		
 	if(edges[tmpAdjacency->node1].tree != edges[tmpAdjacency->node2].tree){
 		
 		minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
-	
+		change = edges[tmpAdjacency->node2].tree;
 		for(int a=0; a < (int) edges.size(); a++){
 			
-			if(edges[a].tree == edges[tmpAdjacency->node2].tree){
+			if(edges[a].tree == change){
 				edges[a].tree = edges[tmpAdjacency->node1].tree;
 			}
 		}
