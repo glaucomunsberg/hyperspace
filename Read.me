@@ -1,0 +1,26 @@
+1. Para compilar
+	Para compilar é necessário ter instalado Cilk C and OpenMP instalados máquina. Você pode compilar:
+
+	1.1 Cilk
+
+		$ cd cilk
+		$ make
+	1.2 OpenMp
+
+		$ cd openmp
+		$ make
+
+2. Para executar
+	Para executar basta passar como parâmetro o arquivo com o grafo e o número de threads que se deseja.
+	se não foi passado nenhum parametro ou parcialmente, será executado com os dados default.
+
+	2.1 Cilk
+
+		$ ./graphCilk ../GraphData.txt 6
+
+	2.2 OpenMP
+
+		$ ./graphOpen ../GraphData.txt 6
+
+
+Obs.: Para maiores informações sobre implementação leia a documentação mais completa no README.md ou no readme.pdf

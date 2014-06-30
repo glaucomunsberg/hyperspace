@@ -2,6 +2,7 @@
 #define	GRAPHCILK_H
 #include <string>
 #include <mutex>
+#include <algorithm>
 using namespace std;
 
 class GraphCilk: public Graph{

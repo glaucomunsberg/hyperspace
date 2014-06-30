@@ -6,11 +6,10 @@
 # 2. How was implemented
 # 3. How to run
 # 4. Results
-# 5. Conclusion
 #
 # @autor   Glauco Roberto Munsberg dos Santos
 # @github  git@github.com:glaucomunsberg/hyperspace.git
-# @version 0.8
+# @version 0.9
 #
 ##########################################################################
 # 1. Introdution
@@ -60,11 +59,39 @@
 #			vector<Node> edges;
 #			int **matrix;
 #			int sizeGraph;
+#			int getSize();
+#
+#			void printMatrix();
+#			void printMinimumWeightSpanningTree();
+#			void inicialize();
+#			void openFile(string fileName);
+#			void setSize(int size);
+#
+#			virtual void minimumWeightSpanningTree()=0;
+#			virtual void insertEdges(int adj1, int adj2)=0;	
+#			virtual void removeEdges(int adj1, int adj2)=0;
 #		}
 #
-#		GraphCilk: public Graph{}
+#		GraphCilk: public Graph{
+#			GraphCilk(){}
+#			~GraphCilk(){}
+#			std::mutex mtx;
 #
-#		GraphOpen: public Graph{}
+#			void insertEdges(int adj1, int adj2);
+#			void removeEdges(int adj1, int adj2);
+#			void checkAdjacencies();
+#			void minimumWeightSpanningTree();
+#		}
+#
+#		GraphOpen: public Graph{
+#			GraphOpen(){}
+#			~GraphOpen(){}
+#
+#			void insertEdges(int adj1, int adj2);
+#			void removeEdges(int adj1, int adj2);
+#			void minimumWeightSpanningTree();
+#			void checkAdjacencies();
+#		}
 #
 #	2.2 Archives Structure:
 #		Graph.cpp
@@ -90,7 +117,7 @@
 #		The compilation is simple, you need use make command with one the
 #		libraries or using the default graph without parallel mode.
 #
-#		$ make <cilk|open> <set_num_threads>
+#		$ make
 #
 #	3.3 Executation
 #
@@ -98,7 +125,9 @@
 #		parameter the file whit graph. Look an example to Cilk Graph and 
 #		the file GraphData.txt whit an example graph and 5 threads:
 #
-#		$ ./graphCilk GraphData.txt 5
+#		$ cd cilk
+#		$ make
+#		$ ./graphCilk ../GraphData.txt 5
 #
 #		Atention: if none file is passed by parameter is used the default
 #		example.
@@ -122,18 +151,15 @@
 # 4. Results
 ##########################################################################
 #
-#   Abaixo temos alguns dos resultados obtidos pelas simulações, todos
-#   foram realizados a partir da versão 0.9.1 na Trie e 0.9.6 da sufixo
-#   onde não se dectou mais problemas de lógica na inserção, remoção e 
-#   busca com arquivos médianos.
-#
-# 	4.1 Simulation Cilk
-#   4.2 Simulation OpenMP
-#
-##########################################################################
-# 5. Conclusion
-##########################################################################
-#
-#   
-#
+#	Below we have som results obtained trough simluations using a 
+#	graph with 7 edges and 11 adjacencys.
+#		
+#	4.1 Simulation Cilk
+#		real	0m0.005s
+#		user	0m0.002s
+#		sys	0m0.002s
+#	4.2 Simulation OpenMP
+#		real	0m0.005s
+#		user	0m0.001s
+#		sys	0m0.003s
 ##########################################################################
