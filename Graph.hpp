@@ -61,7 +61,7 @@ public:
 	void setSize(int size);
 
 	virtual void minimumWeightSpanningTree()=0;
-	virtual void insertEdges(int adj1, int adj2)=0;	
+	virtual void insertEdges(int adj1, int adj2, int value)=0;	
 	virtual void removeEdges(int adj1, int adj2)=0;
 };
 

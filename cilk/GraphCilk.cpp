@@ -14,8 +14,8 @@
 
 using namespace std;
 
-void GraphCilk::insertEdges(int adj1, int adj2){
-	matrix[adj1][adj2]++;
+void GraphCilk::insertEdges(int adj1, int adj2, int value){
+	matrix[adj1][adj2] = value;
 }
 
 void GraphCilk::removeEdges(int adj1, int adj2){

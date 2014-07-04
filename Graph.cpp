@@ -6,6 +6,7 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <algorithm>
+#include <boost/algorithm/string.hpp>
 #include "Graph.hpp"
 
 using namespace std;
@@ -86,6 +87,7 @@ void Graph::openFile(string fileName){
 	int numOfNodes;
 	int node1;
 	int node2;
+	int value;
 	bool inseriuNode1 = false;
 	bool nextNode1 = false;
 	bool nextNode2 = false;
@@ -100,35 +102,17 @@ void Graph::openFile(string fileName){
 
 		while ( getline (theFile,line) ){
 			
-			if(line == ""){
-				
-				nextNode1 = true;
-				nextNode2 = false;
-				inseriuNode1 = false;
-			}
+			while (! theFile.eof() ){
 
-			if(nextNode1 == true && line != "" ){
-				
-				node1 = atoi(line.c_str());
-				nextNode1 = false;
-				nextNode2 = true;
-				inseriuNode1 = true;
-			}
+				getline (theFile,line); 
+				vector<string> str_split;
+				boost::split(str_split,line,boost::is_any_of(" ")); 
+				node1 = atoi(str_split[0].c_str());
+				node2= atoi(str_split[1].c_str());
+				value = atoi(str_split[2].c_str());
 
-			if(nextNode2 == true && line != "" && inseriuNode1 == false  ){
-				
-				node2 = atoi(line.c_str());
-				nextNode1 = false;
-				inseriuNode1 = false;
-				if(node1 <= getSize() && node2 <= getSize()){
-					insertEdges(node1,node2);	
-				}
-			}else{
-
-				if(inseriuNode1){
-
-					inseriuNode1 = false;
-				}
+				insertEdges(node1,node2, value);
+		          
 			}
 			
 		}

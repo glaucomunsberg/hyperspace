@@ -12,8 +12,8 @@
 #include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/omp.h>
 using namespace std;
 
-void GraphOpen::insertEdges(int adj1, int adj2){
-	matrix[adj1][adj2]++;
+void GraphOpen::insertEdges(int adj1, int adj2, int value){
+	matrix[adj1][adj2] = value;
 }
 
 void GraphOpen::removeEdges(int adj1, int adj2){

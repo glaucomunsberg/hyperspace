@@ -10,7 +10,7 @@ public:
 	GraphOpen(){}
 	~GraphOpen(){}
 
-	void insertEdges(int adj1, int adj2);
+	void insertEdges(int adj1, int adj2, int value);
 	void removeEdges(int adj1, int adj2);
 	void minimumWeightSpanningTree();
 	void checkAdjacencies();

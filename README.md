@@ -9,7 +9,7 @@
 #
 # @autor   Glauco Roberto Munsberg dos Santos
 # @github  git@github.com:glaucomunsberg/hyperspace.git
-# @version 0.9
+# @version 1.0
 #
 ##########################################################################
 # 1. Introdution
@@ -134,16 +134,11 @@
 #
 #	3.4 Building a Graph
 #		The construction of the graph file is this way:
-#		~<Number of Nodes>
-#		~
-#		~<Node Number>
-#		~<Nodo whit have adjacency>
-#		~
-#		~<Node Number>
-#		~<Nodo whit have adjacency>
-#		~<Nodo whit have adjacency>
+#		~<Number of Nodes> 
+#		~<Number of Node> <Number of Node> <Weight>
 #		~<IOF>
 #		
+#		An example of graph
 #		Atention: Note that if in a node have two lines adjacency to the
 # 		same other node, means that they  have the weight 2.
 #
