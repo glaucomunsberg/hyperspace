@@ -28,11 +28,10 @@ void GraphCilk::removeEdges(int adj1, int adj2){
 
 void GraphCilk::minimumWeightSpanningTree(){
 	
-	for(int a =0;a < getSize(); a++){
+	cilk_for(int a =0;a < getSize(); a++){
 		
 		edges.push_back(Node(a,a));
 		cilk_for(int b =0; b < getSize(); b++){
-			
 			if(matrix[a][b] != 0){
 				adjacencies.push_back(Adjacency(a,b,matrix[a][b]));
 			}
@@ -42,15 +41,16 @@ void GraphCilk::minimumWeightSpanningTree(){
 	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
 	
 	
-	
+	int thread =0;
 	while(!adjacencies.empty()){
 		
-		cilk_spawn checkAdjacencies();
+		cilk_spawn checkAdjacencies(thread++);
 	}
 	cilk_sync;
 }
-void GraphCilk::checkAdjacencies(){
+void GraphCilk::checkAdjacencies(int tre){
 	GraphCilk::mtx.lock();
+	
 	int change;
 	Adjacency *tmpAdjacency;
 	tmpAdjacency = &adjacencies.at(0);
@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
 	graph->inicialize();
 
 	if(argc <= 1){
-		file = "GraphData.txt";
+		file = "graphExample1Data.txt";
 	}else{
 		file = argv[1];
 		

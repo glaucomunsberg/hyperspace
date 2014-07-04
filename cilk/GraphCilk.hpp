@@ -13,7 +13,8 @@ public:
 	std::mutex mtx;
 	void insertEdges(int adj1, int adj2, int value);
 	void removeEdges(int adj1, int adj2);
-	void checkAdjacencies();
+	void checkAdjacencies(int tre);
 	void minimumWeightSpanningTree();
+	void fo(int oi, int oo);
 };
 #endif	/* GRAPHCILK_H */

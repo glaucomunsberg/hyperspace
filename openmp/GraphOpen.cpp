@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
 	
 	string file = "";
 	if(argc <= 1){
-		file = "GraphData.txt";
+		file = "graphExample1Data.txt";
 	}else{
 		file = argv[1];
 		

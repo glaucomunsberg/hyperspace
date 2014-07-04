@@ -1,5 +1,6 @@
+ICPC = /opt/intel/composer_xe_2013_sp1.2.144/bin/ia32/icpc
 all:
-	g++ -pthread -std=c++0x -o graphCilk GraphCilk.cpp ../Graph.cpp
+	$(ICPC) -std=c++11 -o graphCilk GraphCilk.cpp ../Graph.cpp
 
 clean:
 	$(RM) count *.o *~

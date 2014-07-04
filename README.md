@@ -112,6 +112,7 @@
 #		C++98
 #		Cilk Library 	(Intel Composer XE 2013 SP1)
 #		OpenMP Library
+#		Boost Library
 #		
 #	3.2 Compilation
 #		The compilation is simple, you need use make command with one the
@@ -123,7 +124,7 @@
 #
 #		Look at the compilation way to see the out file and pass through
 #		parameter the file whit graph. Look an example to Cilk Graph and 
-#		the file GraphData.txt whit an example graph and 5 threads:
+#		the file GraphData.txt whit an example graph and 5 threads:	
 #
 #		$ cd cilk
 #		$ make
@@ -138,9 +139,13 @@
 #		~<Number of Node> <Number of Node> <Weight>
 #		~<IOF>
 #		
-#		An example of graph
-#		Atention: Note that if in a node have two lines adjacency to the
-# 		same other node, means that they  have the weight 2.
+#		An example of Graph:
+#		~2
+#		~0 1 8
+#		~1 0 2
+#
+#		Atention: Note that if in a node have a weight do adjacency and 
+#		that weight is not synchronous.
 #
 ##########################################################################
 # 4. Results
