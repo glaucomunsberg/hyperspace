@@ -170,16 +170,17 @@
 # 5. Results
 ##########################################################################
 #
-#	Below we have som results obtained trough simluations using a 
-#	graph with 7 edges and 11 adjacencys.
+#	Below we have two results obtained with 20 threads and trough 
+#	simluations using a graph with 90 edges and 9000 adjacencies.
 #		
 #	5.1 Simulation Cilk
-#		real	0m0.005s
-#		user	0m0.002s
-#		sys	0m0.002s
+#		real	0m0.053s
+#		user	0m0.048s
+#		sys		0m0.003s
+#
 #	5.2 Simulation OpenMP
-#		real	0m0.005s
-#		user	0m0.001s
-#		sys	0m0.003s
+#		real	0m0.226s
+#		user	0m0.211s
+#		sys		0m0.017s
 #
 ##########################################################################
