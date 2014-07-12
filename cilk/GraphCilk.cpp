@@ -43,16 +43,16 @@ void GraphCilk::minimumWeightSpanningTree(){
 	
 	
 	int thread =0;
-	while(!adjacencies.empty()){
+	cilk_for(int a=0;!adjacencies.empty();a++){
 		
-		cilk_spawn checkAdjacencies(thread++);
+		checkAdjacencies(thread++);
 	}
 
 	cilk_sync;
 }
-void GraphCilk::checkAdjacencies(int tre){
+void GraphCilk::checkAdjacencies(int thread){
 	GraphCilk::mtx.lock();
-	
+	//cout << "executed: " << thread << endl;
 	int change;
 	Adjacency *tmpAdjacency;
 	tmpAdjacency = &adjacencies.at(0);

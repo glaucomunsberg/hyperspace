@@ -10,7 +10,7 @@
 #
 # @autor   Glauco Roberto Munsberg dos Santos
 # @github  git@github.com:glaucomunsberg/hyperspace.git
-# @version 1.0
+# @version 1.0a
 #
 ##########################################################################
 # 1. Introdution

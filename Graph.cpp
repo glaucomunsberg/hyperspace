@@ -47,27 +47,33 @@ int Graph::getSize(){
 void Graph::printMatrix(){
 
 	cout << "Nodes:" << endl;
-	cout << "\t";
+	if(sizeGraph < 15){
 
-	for(int a=0; a < getSize(); a++){
-		cout <<a<<"\t";
-	}
+		cout << "\t";
 
-	cout << endl;
-	for(int a=0; a < getSize(); a++){
-
-		cout << a << "\t";
-		for(int b=0; b < getSize();b++){
-
-			if(matrix[a][b] != 0){
-
-				cout << "●->" << matrix[a][b] << "\t" ;
-			}else{
-
-				cout << "\t";
-			}
+		for(int a=0; a < getSize(); a++){
+			cout <<a<<"\t";
 		}
-		cout << endl << endl;
+
+		cout << endl;
+		for(int a=0; a < getSize(); a++){
+
+			cout << a << "\t";
+			for(int b=0; b < getSize();b++){
+
+				if(matrix[a][b] != 0){
+
+					cout << "●->" << matrix[a][b] << "\t" ;
+				}else{
+
+					cout << "\t";
+				}
+			}
+
+			cout << endl << endl;
+		}
+	}else{
+		cout << "\t Number of nodes is more than 15 and not possibility you see on terminal" << endl;
 	}
 } 
 
@@ -78,12 +84,13 @@ void Graph::printMinimumWeightSpanningTree(){
 
 		cout << "\t Error: Minimum Spanning Tree not implemented yeat." << endl;
 	}else{
-
 		cout << "\tMinimum Spanning Tree" << endl;
 		for(int a=0; a < (int)minimumAdjacencies.size(); a++){
 
-			cout << "[" <<minimumAdjacencies[a].node1 << "," << minimumAdjacencies[a].node2 << "]=" << minimumAdjacencies[a].value << endl;
+			cout << "[" << minimumAdjacencies[a].node1 << "," << minimumAdjacencies[a].node2 << "] =" << minimumAdjacencies[a].value << endl;
 		}
+
+		cout << "Total of Adjacencies: " << minimumAdjacencies.size() << endl;
 	}
 }
 

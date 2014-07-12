@@ -2,7 +2,9 @@
 #include <string>
 #include <fstream>
 #include <stdlib.h>     /* atoi */
-
+#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk.h>
+#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk_stub.h>
+#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk_api.h>
 using namespace std;
 
 class GraphGenerator{
@@ -65,9 +67,14 @@ public:
 	}
 
 };
-
+void oie(int a){
+	cout << "oi:" << a << endl;
+}
 int main(int argc, char* argv[]) {
 	
+	cilk_for( int a=0; a < argv[1] ;a++){
+		oie(a);
+	}
 
 	GraphGenerator *graph;
 	cout << "Generator Graph" << endl;

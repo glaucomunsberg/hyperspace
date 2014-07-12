@@ -9,7 +9,7 @@
 #include <string>
 #include "../Graph.hpp"
 #include "GraphOpen.hpp"
-#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/omp.h>
+
 using namespace std;
 
 void GraphOpen::insertEdges(int adj1, int adj2, int value){
@@ -39,13 +39,16 @@ void GraphOpen::minimumWeightSpanningTree(){
 	}
 
 	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
-
+	int thread =0;
+	
 	while(!adjacencies.empty()){
 
-		checkAdjacencies();
+		checkAdjacencies(thread++);
 	}
 }
-void GraphOpen::checkAdjacencies(){
+void GraphOpen::checkAdjacencies(int thread){
+	
+	//cout << "executed: " << thread << endl;
 	Adjacency *tmpAdjacency;
 	int change;
 	tmpAdjacency = &adjacencies.at(0);	
@@ -54,12 +57,12 @@ void GraphOpen::checkAdjacencies(){
 		minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
 		change = edges[tmpAdjacency->node2].tree;
 		
-		#pragma opm parallel
+		#pragma omp parallel
 		{
-			#pragma opm for schedule(dynamic,2)
+			#pragma omp for schedule(dynamic,2)
 			
 			for(int a=0; a < (int)edges.size(); a++){
-				cout << a << endl;
+				
 				if(edges[a].tree == change){
 					edges[a].tree = edges[tmpAdjacency->node1].tree;
 				}
