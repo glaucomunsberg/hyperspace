@@ -11,6 +11,7 @@ public:
 	GraphCilk(){}
 	~GraphCilk(){}
 	std::mutex mtx;
+	
 	void insertEdges(int adj1, int adj2, int value);
 	void removeEdges(int adj1, int adj2);
 	void checkAdjacencies(int tre);

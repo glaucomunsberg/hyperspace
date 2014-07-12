@@ -20,13 +20,11 @@ Graph::~Graph(){
 void Graph::inicialize(){
 		
 	matrix = new int *[sizeGraph];
-	//Create a matrix
 	for (int count = 0; count < sizeGraph; count++){
 
 	    matrix[count] = new int[sizeGraph];
 	}
 
-	//Make the matrix with unabled adj.
 	for(int count=0; count < sizeGraph; count++){
 
 		for(int count2=0;count2 < sizeGraph; count2++){
@@ -37,26 +35,35 @@ void Graph::inicialize(){
 }
 
 void Graph::setSize(int size){
+
 	sizeGraph = size;
 }
 
 int Graph::getSize(){
+
 	return sizeGraph;
 }
 
 void Graph::printMatrix(){
+
 	cout << "Nodes:" << endl;
 	cout << "\t";
+
 	for(int a=0; a < getSize(); a++){
 		cout <<a<<"\t";
 	}
+
 	cout << endl;
 	for(int a=0; a < getSize(); a++){
+
 		cout << a << "\t";
 		for(int b=0; b < getSize();b++){
+
 			if(matrix[a][b] != 0){
+
 				cout << "●->" << matrix[a][b] << "\t" ;
 			}else{
+
 				cout << "\t";
 			}
 		}
@@ -69,11 +76,10 @@ void Graph::printMinimumWeightSpanningTree(){
 
 	if(minimumAdjacencies.empty()){
 
-		cout << "Minimum Spanning Tree not implemented yeat." << endl;
+		cout << "\t Error: Minimum Spanning Tree not implemented yeat." << endl;
 	}else{
 
-		cout << "Minimum Spanning Tree" << endl;
-		
+		cout << "\tMinimum Spanning Tree" << endl;
 		for(int a=0; a < (int)minimumAdjacencies.size(); a++){
 
 			cout << "[" <<minimumAdjacencies[a].node1 << "," << minimumAdjacencies[a].node2 << "]=" << minimumAdjacencies[a].value << endl;
@@ -83,7 +89,6 @@ void Graph::printMinimumWeightSpanningTree(){
 
 void Graph::openFile(string fileName){	
 	
-	string line;
 	int numOfNodes;
 	int node1;
 	int node2;
@@ -93,7 +98,8 @@ void Graph::openFile(string fileName){
 	bool nextNode2 = false;
 
 	ifstream theFile (fileName.c_str());
-	
+	string line;
+
 	if(theFile.is_open()){
 
 		theFile >> numOfNodes;
@@ -110,16 +116,13 @@ void Graph::openFile(string fileName){
 				node1 = atoi(str_split[0].c_str());
 				node2= atoi(str_split[1].c_str());
 				value = atoi(str_split[2].c_str());
-
-				insertEdges(node1,node2, value);
-		          
+				insertEdges(node1,node2, value); 
 			}
-			
 		}
+		
 		theFile.close();
 	}else{
 
-		cout << "It's not possible open the file.\n";
-		
+		cout << "\t Error: It's not possible open the file \"" << fileName << "\".\n";
 	}
 }

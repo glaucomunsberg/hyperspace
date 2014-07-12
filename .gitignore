@@ -9,6 +9,8 @@ graphCilk
 graphCilk.dSYM/
 graphOpen
 graphOpen.dSYM
+graphGenerator/generator
+graphGenerator/generator.dSYM
 
 # Compiled Dynamic libraries
 *.so

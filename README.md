@@ -5,7 +5,8 @@
 # 1.Introdution
 # 2. How was implemented
 # 3. How to run
-# 4. Results
+# 4. Generator
+# 5. Results
 #
 # @autor   Glauco Roberto Munsberg dos Santos
 # @github  git@github.com:glaucomunsberg/hyperspace.git
@@ -118,7 +119,7 @@
 #		The compilation is simple, you need use make command with one the
 #		libraries or using the default graph without parallel mode.
 #
-#		$ make
+#		$ make <graph|cilk|open|generator*>
 #
 #	3.3 Executation
 #
@@ -147,19 +148,38 @@
 #		Atention: Note that if in a node have a weight do adjacency and 
 #		that weight is not synchronous.
 #
+#		* To understant better the generator look at quarter topic.
+#
 ##########################################################################
 # 4. Results
+##########################################################################
+#
+#	GraphGenerator is a generator of graphs tool that can assist you to
+#	you get a random graph to and help you to test is implementation. If
+#	you need compile, do like is described on 3.2 topic (using generator
+#	parameter) and you might use pass through three parameter (you have 
+#	an obrigation to pass two only), look below how:
+#
+#	$ make generator
+#	$ cd graphGenerator
+#	$ ./generator <num_nodos> <num_adjacencies> <file_out>
+#
+#	<num_nodos> and <num_adjacencies> need be more than 0
+#
+##########################################################################
+# 5. Results
 ##########################################################################
 #
 #	Below we have som results obtained trough simluations using a 
 #	graph with 7 edges and 11 adjacencys.
 #		
-#	4.1 Simulation Cilk
+#	5.1 Simulation Cilk
 #		real	0m0.005s
 #		user	0m0.002s
 #		sys	0m0.002s
-#	4.2 Simulation OpenMP
+#	5.2 Simulation OpenMP
 #		real	0m0.005s
 #		user	0m0.001s
 #		sys	0m0.003s
+#
 ##########################################################################

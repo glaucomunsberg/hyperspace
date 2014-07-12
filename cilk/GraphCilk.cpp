@@ -15,6 +15,7 @@
 using namespace std;
 
 void GraphCilk::insertEdges(int adj1, int adj2, int value){
+
 	matrix[adj1][adj2] = value;
 }
 
@@ -46,6 +47,7 @@ void GraphCilk::minimumWeightSpanningTree(){
 		
 		cilk_spawn checkAdjacencies(thread++);
 	}
+
 	cilk_sync;
 }
 void GraphCilk::checkAdjacencies(int tre){
@@ -72,13 +74,16 @@ void GraphCilk::checkAdjacencies(int tre){
 }
 
 int main(int argc, char* argv[]) {
-	
+
+	cout << "Graph->GraphCilk()" << endl;
 	if(argc > 2){
+
 		__cilkrts_end_cilk();  
 		__cilkrts_set_param("nworkers", argv[2]);
-		cout << "Graph->GraphCilk()" << endl << "Threads:" << argv[2] << endl;
+		cout << "\tThreads:" << argv[2] << endl;
 	}else{
-		cout << "Graph->GraphCilk()" << endl << "Threads:" <<  __cilkrts_get_nworkers() << endl;
+
+		cout << "\tThreads:" <<  __cilkrts_get_nworkers() << endl;
 	}
 
 	Graph *graph;
@@ -90,16 +95,18 @@ int main(int argc, char* argv[]) {
 	graph->inicialize();
 
 	if(argc <= 1){
+
 		file = "graphExample1Data.txt";
 	}else{
+
 		file = argv[1];
 		
 	}
-	graph->openFile(file);
-	
 
+	graph->openFile(file);
 	graph->printMatrix();
 	graph->minimumWeightSpanningTree();
 	graph->printMinimumWeightSpanningTree();
+	
 	return 0;
 }
