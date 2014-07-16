@@ -43,28 +43,46 @@ void GraphCilk::minimumWeightSpanningTree(){
 	
 	
 	int idThread =0;
-	Adjacency *tmpAdjacency, tmpAdjacency1;
+	int idZone=0;
+	Adjacency *tmpAdjacency;
+	
+
+	cout << "adjacencias" << endl;
+
+	for(int a=0; a < adjacencies.size();a++){
+		cout << "ADJ["<< adjacencies[a].node1 << "," << adjacencies[a].node2 << "]=" << adjacencies[a].value << endl;
+	}
+
 	while(!adjacencies.empty()){
-		
+
+		cout << "Zone " << idZone  << endl;
+		idZone++;
 		tmpAdjacency = &adjacencies.at(0);
-		cilk_spawn checkAdjacencies(&tmpAdjacency,idThread);
+		cilk_spawn checkAdjacencies(tmpAdjacency,idThread);
+		cout << "ADJ["<< tmpAdjacency->node1 << "," << tmpAdjacency->node2 << "]=" << tmpAdjacency->value << endl;
 		idThread++;
 		adjacencies.erase(adjacencies.begin());
+		
+		Adjacency *tmpAdjacency1;
+		tmpAdjacency1 = &adjacencies.at(0);
+		int valuePivo = tmpAdjacency->value;
+		int valueOuther = tmpAdjacency1->value;
+		while(valuePivo == valueOuther){
 
-		tmpAdjacenc1 = &adjacencies.at(0);
-
-		while(tmpAdjacency->value == tmpAdjacenc1->value){
-
-			cilk_spawn checkAdjacencies(&tmpAdjacency1,idThread);
+			cout << "ADJ1["<< tmpAdjacency1->node1 << "," << tmpAdjacency1->node2 << "]="  << tmpAdjacency1->value << endl;
+			cilk_spawn checkAdjacencies(tmpAdjacency1,idThread);
 			idThread++;
 			adjacencies.erase(adjacencies.begin());
+			
+			tmpAdjacency1 = &adjacencies.at(0);
+			valueOuther = tmpAdjacency1->value;
 		}
-
+		
 		cilk_sync;
 	}
 	
 }
-void GraphCilk::checkAdjacencies(Adjacency tmpAdjacency, int thread){
+void GraphCilk::checkAdjacencies(Adjacency *tmpAdjacency, int thread){
 	
 	GraphCilk::mtx.lock();
 
@@ -82,14 +100,6 @@ void GraphCilk::checkAdjacencies(Adjacency tmpAdjacency, int thread){
 			}
 		}
 	}
-
-	for(int a=0; a < adjacencies.size();a++){
-		if(tmpAdjacency == &adjacencies.at(a) ){
-			removePosition = a;
-		}
-	}
-
-	delete tmpAdjacency;
 	
 	GraphCilk::mtx.unlock();
 }
@@ -117,7 +127,7 @@ int main(int argc, char* argv[]) {
 
 	if(argc <= 1){
 
-		file = "graphExample1Data.txt";
+		file = "graphExample.txt";
 	}else{
 
 		file = argv[1];
