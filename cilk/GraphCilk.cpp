@@ -42,21 +42,35 @@ void GraphCilk::minimumWeightSpanningTree(){
 	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
 	
 	
-	int thread =0;
-	cilk_for(int a=0;!adjacencies.empty();a++){
+	int idThread =0;
+	Adjacency *tmpAdjacency, tmpAdjacency1;
+	while(!adjacencies.empty()){
 		
-		checkAdjacencies(thread++);
-	}
+		tmpAdjacency = &adjacencies.at(0);
+		cilk_spawn checkAdjacencies(&tmpAdjacency,idThread);
+		idThread++;
+		adjacencies.erase(adjacencies.begin());
 
-	cilk_sync;
+		tmpAdjacenc1 = &adjacencies.at(0);
+
+		while(tmpAdjacency->value == tmpAdjacenc1->value){
+
+			cilk_spawn checkAdjacencies(&tmpAdjacency1,idThread);
+			idThread++;
+			adjacencies.erase(adjacencies.begin());
+		}
+
+		cilk_sync;
+	}
+	
 }
-void GraphCilk::checkAdjacencies(int thread){
+void GraphCilk::checkAdjacencies(Adjacency tmpAdjacency, int thread){
+	
 	GraphCilk::mtx.lock();
-	//cout << "executed: " << thread << endl;
+
 	int change;
-	Adjacency *tmpAdjacency;
-	tmpAdjacency = &adjacencies.at(0);
-		
+	int removePosition;
+
 	if(edges[tmpAdjacency->node1].tree != edges[tmpAdjacency->node2].tree){
 		
 		minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
@@ -69,7 +83,14 @@ void GraphCilk::checkAdjacencies(int thread){
 		}
 	}
 
-	adjacencies.erase(adjacencies.begin());
+	for(int a=0; a < adjacencies.size();a++){
+		if(tmpAdjacency == &adjacencies.at(a) ){
+			removePosition = a;
+		}
+	}
+
+	delete tmpAdjacency;
+	
 	GraphCilk::mtx.unlock();
 }
 

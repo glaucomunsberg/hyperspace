@@ -14,7 +14,7 @@ public:
 	
 	void insertEdges(int adj1, int adj2, int value);
 	void removeEdges(int adj1, int adj2);
-	void checkAdjacencies(int thread);
+	void checkAdjacencies(Adjacency tmpAdjacency, int thread);
 	void minimumWeightSpanningTree();
 };
 #endif	/* GRAPHCILK_H */
