@@ -100,9 +100,6 @@ void Graph::openFile(string fileName){
 	int node1;
 	int node2;
 	int value;
-	bool inseriuNode1 = false;
-	bool nextNode1 = false;
-	bool nextNode2 = false;
 
 	ifstream theFile (fileName.c_str());
 	string line;

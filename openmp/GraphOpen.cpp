@@ -39,19 +39,52 @@ void GraphOpen::minimumWeightSpanningTree(){
 	}
 
 	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
-	int thread =0;
 	
-	while(!adjacencies.empty()){
+	int idThread =0;
+	Adjacency *tmp1Adjacency;
+	Adjacency *tmp2Adjacency;
 
-		checkAdjacencies(thread++);
+	while(!adjacencies.empty()){
+		
+		tmp1Adjacency = new Adjacency(adjacencies.at(0).node1,adjacencies.at(0).node2,adjacencies.at(0).value);
+		checkAdjacencies(tmp1Adjacency,idThread);
+		idThread++;
+		adjacencies.erase(adjacencies.begin());
+		
+		if(!adjacencies.empty()){
+			tmp2Adjacency = new Adjacency(adjacencies.at(0).node1,adjacencies.at(0).node2,adjacencies.at(0).value);
+			int valuePivo = tmp1Adjacency->value;
+			int valueOuther = tmp2Adjacency->value;
+
+			while(valuePivo == valueOuther){
+				#pragma omp parallel
+				{
+					#pragma omp single
+					{
+						checkAdjacencies(tmp2Adjacency,idThread);
+						idThread++;
+						adjacencies.erase(adjacencies.begin());
+						
+						if(!adjacencies.empty()){
+							tmp2Adjacency = &adjacencies.at(0);
+							valueOuther = tmp2Adjacency->value;
+
+						}else{
+							valueOuther = valuePivo+1;
+						}
+					}
+				}
+				
+				
+			}
+		}
+		
 	}
 }
-void GraphOpen::checkAdjacencies(int thread){
+void GraphOpen::checkAdjacencies(Adjacency *tmpAdjacency, int thread){
 	
-	//cout << "executed: " << thread << endl;
-	Adjacency *tmpAdjacency;
-	int change;
-	tmpAdjacency = &adjacencies.at(0);	
+	omp_set_lock(&lock);
+	int change;	
 	if(edges[tmpAdjacency->node1].tree != edges[tmpAdjacency->node2].tree){
 		
 		minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
@@ -72,6 +105,8 @@ void GraphOpen::checkAdjacencies(int thread){
 	}
 
 	adjacencies.erase(adjacencies.begin());
+
+	omp_unset_lock(&lock);
 }
 
 int main(int argc, char* argv[]) {

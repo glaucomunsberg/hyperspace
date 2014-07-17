@@ -9,12 +9,17 @@ class GraphOpen: public Graph{
 public:
 
 	
-
-	GraphOpen(){}
-	~GraphOpen(){}
+	omp_lock_t lock;
+	GraphOpen(){
+		omp_init_lock(&lock);
+	}
+	~GraphOpen(){
+		omp_destroy_lock(&lock);
+	}
+	
 	void insertEdges(int adj1, int adj2, int value);
 	void removeEdges(int adj1, int adj2);
 	void minimumWeightSpanningTree();
-	void checkAdjacencies(int thread);
+	void checkAdjacencies(Adjacency *tmpAdjacency, int thread);
 };
 #endif	/* GRAPHOPEN_H */
