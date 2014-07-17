@@ -12,11 +12,18 @@ public:
 	int node1;
 	int node2;
 	int value;
+	Adjacency(){}
 	Adjacency(int nod1, int nod2, int val){
 
 		node1 = nod1;
 		node2 = nod2;
 		value = val;
+	}
+
+	Adjacency(Adjacency const& copy){
+		node1 = copy.node1;
+		node2 = copy.node2;
+		value = copy.value;
 	}
 };
 

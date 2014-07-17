@@ -43,41 +43,36 @@ void GraphCilk::minimumWeightSpanningTree(){
 	
 	
 	int idThread =0;
-	int idZone=0;
-	Adjacency *tmpAdjacency;
+	Adjacency *tmp1Adjacency;
+	Adjacency *tmp2Adjacency;
 	
-
-	cout << "adjacencias" << endl;
-
-	for(int a=0; a < adjacencies.size();a++){
-		cout << "ADJ["<< adjacencies[a].node1 << "," << adjacencies[a].node2 << "]=" << adjacencies[a].value << endl;
-	}
 
 	while(!adjacencies.empty()){
 
-		cout << "Zone " << idZone  << endl;
-		idZone++;
-		tmpAdjacency = &adjacencies.at(0);
-		cilk_spawn checkAdjacencies(tmpAdjacency,idThread);
-		cout << "ADJ["<< tmpAdjacency->node1 << "," << tmpAdjacency->node2 << "]=" << tmpAdjacency->value << endl;
+		tmp1Adjacency = new Adjacency(adjacencies.at(0).node1,adjacencies.at(0).node2,adjacencies.at(0).value);
+		cilk_spawn checkAdjacencies(tmp1Adjacency,idThread);
 		idThread++;
 		adjacencies.erase(adjacencies.begin());
 		
-		Adjacency *tmpAdjacency1;
-		tmpAdjacency1 = &adjacencies.at(0);
-		int valuePivo = tmpAdjacency->value;
-		int valueOuther = tmpAdjacency1->value;
-		while(valuePivo == valueOuther){
+		if(!adjacencies.empty()){
+			tmp2Adjacency = new Adjacency(adjacencies.at(0).node1,adjacencies.at(0).node2,adjacencies.at(0).value);
+			int valuePivo = tmp1Adjacency->value;
+			int valueOuther = tmp2Adjacency->value;
+			while(valuePivo == valueOuther){
+				cilk_spawn checkAdjacencies(tmp2Adjacency,idThread);
+				idThread++;
+				adjacencies.erase(adjacencies.begin());
+				
+				if(!adjacencies.empty()){
+					tmp2Adjacency = &adjacencies.at(0);
+					valueOuther = tmp2Adjacency->value;
 
-			cout << "ADJ1["<< tmpAdjacency1->node1 << "," << tmpAdjacency1->node2 << "]="  << tmpAdjacency1->value << endl;
-			cilk_spawn checkAdjacencies(tmpAdjacency1,idThread);
-			idThread++;
-			adjacencies.erase(adjacencies.begin());
-			
-			tmpAdjacency1 = &adjacencies.at(0);
-			valueOuther = tmpAdjacency1->value;
+				}else{
+					valueOuther = valuePivo+1;
+				}
+			}
 		}
-		
+
 		cilk_sync;
 	}
 	
