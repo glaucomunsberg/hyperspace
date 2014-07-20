@@ -2,11 +2,14 @@
 #define	GRAPHCPP11_H
 #include <string>
 #include <algorithm>
+#include <mutex>
 using namespace std;
 
 class GraphCpp11: public Graph{
 public:
 
+
+	std::mutex mutex;
 	GraphCpp11(){}
 	~GraphCpp11(){}
 	

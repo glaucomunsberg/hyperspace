@@ -10,6 +10,7 @@
 #include "GraphCpp11.hpp"
 #include <thread>
 #include <mutex>
+#include <vector>
 
 static std::mutex barrier;
 
@@ -47,16 +48,16 @@ void GraphCpp11::minimumWeightSpanningTree(){
 	int idThread = 0;
 	Adjacency *tmp1Adjacency;
 	Adjacency *tmp2Adjacency;
-	
+	std::vector<std::thread> th;
 	
 	while(!adjacencies.empty()){
 		tmp1Adjacency = new Adjacency(adjacencies.at(0).node1,adjacencies.at(0).node2,adjacencies.at(0).value);
 
-		std::thread t2(&GraphCpp11::checkAdjacencies, this, tmp1Adjacency,idThread);
+		th.push_back(std::thread(&GraphCpp11::checkAdjacencies, this, tmp1Adjacency,idThread));
 		idThread++;
 		adjacencies.erase(adjacencies.begin());
 		
-		
+			
 
 		if(!adjacencies.empty()){
 			tmp2Adjacency = new Adjacency(adjacencies.at(0).node1,adjacencies.at(0).node2,adjacencies.at(0).value);
@@ -64,7 +65,7 @@ void GraphCpp11::minimumWeightSpanningTree(){
 			int valueOuther = tmp2Adjacency->value;
 			while(valuePivo == valueOuther){
 
-				std::thread t(&GraphCpp11::checkAdjacencies, this, tmp2Adjacency,idThread);
+				th.push_back(std::thread(&GraphCpp11::checkAdjacencies, this, tmp2Adjacency,idThread));
 				idThread++;
 				adjacencies.erase(adjacencies.begin());
 				
@@ -75,18 +76,20 @@ void GraphCpp11::minimumWeightSpanningTree(){
 				}else{
 					valueOuther = valuePivo+1;
 				}
-				t.join();
+				
 			}
 
 		}
-		t2.join();
-
+		for(auto &t : th){
+			t.join();
+		} 
+		th.clear();
 	}
 }
 
 void GraphCpp11::checkAdjacencies(Adjacency *tmpAdjacency, int thread){
 	
-	
+	GraphCpp11::mutex.lock();
 	int change;
 	int removePosition;
 
@@ -101,7 +104,7 @@ void GraphCpp11::checkAdjacencies(Adjacency *tmpAdjacency, int thread){
 			}
 		}
 	}
-	std::lock_guard<std::mutex> block_threads_until_finish_this_job(barrier);
+	GraphCpp11::mutex.unlock();
 }
 
 int main(int argc, char* argv[]) {
