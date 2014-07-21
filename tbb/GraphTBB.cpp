@@ -6,11 +6,11 @@
 #include <stdio.h>      /* printf, fgets */
 #include <stdlib.h>     /* atoi */
 #include <string>
-#include "../Graph.hpp"
 #include "GraphTBB.hpp"
-#include "Check.hpp"
 #include "tbb/parallel_for.h"
 #include "tbb/blocked_range.h"
+#include "tbb/task_scheduler_init.h"
+#include <tbb/mutex.h>
 
 using namespace tbb;
 using namespace std;
@@ -28,6 +28,41 @@ void GraphTBB::removeEdges(int adj1, int adj2){
 	}
 }
 
+struct check {
+	vector<Adjacency> * adjacencies;
+	vector<Adjacency> * minimumAdjacencies;
+	vector<Node> * edges;
+
+	void operator() ( const tbb::blocked_range<size_t> &r) const {
+		//tbb::mutex countMutex;
+		cout << r.begin();/*
+		for ( size_t i = r.begin(); i != r.end(); ++i ) {
+			cout << "aqui";
+			//countMutex.lock(); 
+			int change;
+			int removePosition;
+			Adjacency *tmpAdjacency = &adjacencies->at(i);
+			Node *edges1 = &edges->at(tmpAdjacency->node1);
+			Node *edges2 = &edges->at(tmpAdjacency->node2);
+			if(edges1->tree != edges2->tree){
+			
+				minimumAdjacencies->push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
+				change = edges2->tree;
+				for(int a=0; a < (int) edges->size(); a++){
+					Node *tmpEdge = &edges->at(a);
+					if(tmpEdge->tree == change){
+						tmpEdge->tree = edges1->tree;
+					}
+				}
+			}
+		//	countMutex.unlock();	
+		}*/
+
+	}
+
+};
+
+
 void GraphTBB::minimumWeightSpanningTree(){
 	
 	for(int a =0;a < getSize(); a++){
@@ -41,29 +76,33 @@ void GraphTBB::minimumWeightSpanningTree(){
 	}
 
 	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
-	Check * checkAdjacencies;
-	checkAdjacencies = new Check();
+
+	struct check checkAdjacencies;
+	checkAdjacencies.adjacencies = &adjacencies;
+	checkAdjacencies.minimumAdjacencies = &minimumAdjacencies;
+	checkAdjacencies.edges = &edges;
+
 	int cont = 0;
 	int i = 0;
-	int anterior = 0;	
+	int anterior = 0;
+	
 	while(!adjacencies.empty()){
-		
+
 		if(adjacencies.at(i).value == anterior){
 			cont++;
 		} else {
-			parallel_for(blocked_range<size_t>(0, cont), this->checkAdjacencies(* adjacencies, * edges, * minimumAdjacencies, cont));
-			adjacencies = checkAdjacencies.getAdjacency();
-			edges = checkAdjacencies.getEdges();
-			minimumAdjacencies = checkAdjacencies.getMinimumAdjacencies();
-
-
-			anterior = adjacencies.at(i).value;
-			for (j = 0; j <= cont; j++){
-				adjacencies.erase(adjacencies.begin());
+			if(cont != 0){
+				tbb::parallel_for(tbb::blocked_range<size_t>(0, cont-1), checkAdjacencies);
+				cout << "aqui";
+				anterior = adjacencies.at(i).value;
+				for (int j = 0; j < cont; j++){
+					adjacencies.erase(adjacencies.begin());
+				}		
 			}
-
+			i = 0;
+			
 		}
-	i++;
+		i++;
 	}
 }
 

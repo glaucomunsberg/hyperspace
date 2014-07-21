@@ -2,7 +2,7 @@
 #define	GRAPHTBB_H
 #include <string>
 #include <algorithm>
-#include "Check.hpp"
+#include "../Graph.hpp"
 using namespace std;
 
 class GraphTBB: public Graph{
