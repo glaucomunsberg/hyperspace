@@ -32,13 +32,11 @@ struct check {
 	vector<Adjacency> * adjacencies;
 	vector<Adjacency> * minimumAdjacencies;
 	vector<Node> * edges;
-
+ 
 	void operator() ( const tbb::blocked_range<size_t> &r) const {
-		//tbb::mutex countMutex;
-		cout << r.begin();/*
-		for ( size_t i = r.begin(); i != r.end(); ++i ) {
-			cout << "aqui";
-			//countMutex.lock(); 
+		tbb::mutex countMutex;
+		for ( size_t i = r.begin(); i < r.end(); ++i ) {
+			countMutex.lock();
 			int change;
 			int removePosition;
 			Adjacency *tmpAdjacency = &adjacencies->at(i);
@@ -55,8 +53,8 @@ struct check {
 					}
 				}
 			}
-		//	countMutex.unlock();	
-		}*/
+			countMutex.unlock();
+		}
 
 	}
 
@@ -84,25 +82,39 @@ void GraphTBB::minimumWeightSpanningTree(){
 
 	int cont = 0;
 	int i = 0;
-	int anterior = 0;
-	
+	int anterior = adjacencies.at(0).value;
+	int valueNow;
+	int flag;
 	while(!adjacencies.empty()){
-
-		if(adjacencies.at(i).value == anterior){
+		flag = 0;
+		valueNow = adjacencies.at(i).value;
+		if(valueNow == anterior){
 			cont++;
 		} else {
-			if(cont != 0){
-				tbb::parallel_for(tbb::blocked_range<size_t>(0, cont-1), checkAdjacencies);
-				cout << "aqui";
+
+				if(cont != 0){
+					tbb::parallel_for(tbb::blocked_range<size_t>(0, cont), checkAdjacencies);	
+				}
+				
 				anterior = adjacencies.at(i).value;
+				flag = 1;
 				for (int j = 0; j < cont; j++){
 					adjacencies.erase(adjacencies.begin());
-				}		
-			}
-			i = 0;
-			
+				}
+				cont = 0;		
+				i = 0;
+
 		}
-		i++;
+		if(i < adjacencies.size()-1){
+			if(flag == 0){
+				i++;	
+			}
+		} else {
+			tbb::parallel_for(tbb::blocked_range<size_t>(0, cont), checkAdjacencies);
+			for (int j = 0; j < cont; j++){
+					adjacencies.erase(adjacencies.begin());
+			}
+		}
 	}
 }
 
