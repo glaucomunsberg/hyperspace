@@ -61,8 +61,7 @@ function implementation_openmp(){
 
 	echo " Running tests"
 	for i in `seq 0 1 30`; do
-		echo "Test " $i
-		 /usr/bin/time -f "%S" ./openmp/graphOpen ../$exampleUsed $numberOfThreads
+		 /usr/bin/time -f "%S" ./openmp/graphOpen $exampleUsed $numberOfThreads > out
 	done
 
 	echo "Press ENTER" 
@@ -81,8 +80,7 @@ function implementation_c11()
 
 	echo " Running tests"
 	for i in `seq 0 1 30`; do
-		echo "Test " $i
-		 /usr/bin/time -f "%S" ./c++11/graphCpp11 ../$exampleUsed $numberOfThreads
+		 /usr/bin/time -f "%S" ./c++11/graphCpp11 $exampleUsed $numberOfThreads > out
 	done
 
 	echo "Press ENTER" 
@@ -101,8 +99,7 @@ function implementation_cilk()
 
 	echo " Running tests"
 	for i in `seq 0 1 30`; do
-		echo "Test " $i
-		 /usr/bin/time -f "%S" ./cilk/graphCilk ../$exampleUsed $numberOfThreads
+		 /usr/bin/time -f "%S" ./cilk/graphCilk $exampleUsed $numberOfThreads > out
 	done
 
 	echo "Press ENTER" 
@@ -121,8 +118,7 @@ function implementation_original()
 
 	echo " Running tests"
 	for i in `seq 0 1 30`; do
-		echo "Test " $i
-		 /usr/bin/time -f "%S" ./original/graphOriginal ../$exampleUsed $numberOfThreads
+		 /usr/bin/time -f "%S" ./original/graphOriginal $exampleUsed $numberOfThreads > out
 	done
 
 	echo "Press ENTER" 
@@ -141,7 +137,6 @@ function implementation_tbb()
 
 	echo " Running tests"
 	for i in `seq 0 1 30`; do
-		echo "Test " $i
 		 /usr/bin/time -f "%S" ./tbb/graphTbb ../$exampleUsed $numberOfThreads
 	done
 
@@ -161,6 +156,7 @@ while [ $run = true ]; do
 	echo " 4 - OpenMP"
 	echo " 5 - TBB"
 	echo " 0 - Exit"
+	echo " Your Choose:"
 	leu=false
 	read thefunction
 	case $thefunction in

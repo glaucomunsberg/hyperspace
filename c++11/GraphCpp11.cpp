@@ -80,9 +80,13 @@ void GraphCpp11::minimumWeightSpanningTree(){
 			}
 
 		}
+		for (int a = 0; a < th.size(); a++){
+			th[a].join();
+		}
+		/*
 		for(auto &t : th){
 			t.join();
-		} 
+		} */
 		th.clear();
 	}
 }
