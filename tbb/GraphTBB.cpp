@@ -8,11 +8,11 @@
 #include <string>
 #include "../Graph.hpp"
 #include "GraphTBB.hpp"
-#include "tbb/blocked_range.h"
+#include "Check.hpp"
 #include "tbb/parallel_for.h"
-#include "tbb/parallel_sort.h"
-#include "tbb/task_scheduler_init.h"
+#include "tbb/blocked_range.h"
 
+using namespace tbb;
 using namespace std;
 
 void GraphTBB::insertEdges(int adj1, int adj2, int value){
@@ -28,21 +28,7 @@ void GraphTBB::removeEdges(int adj1, int adj2){
 	}
 }
 
-/*
-void GraphTBB::insertList(int a){	
-		edges.push_back(Node(a,a));
-		for(int b =0; b < getSize(); b++){
-			if(matrix[a][b] != 0){
-				adjacencies.push_back(Adjacency(a,b,matrix[a][b]));
-			}
-		}
-	}
-
-*/
-
 void GraphTBB::minimumWeightSpanningTree(){
-
-//	tbb::parallel_for(tbb::blocked_range<size_t>(0,getSize()) insertList())
 	
 	for(int a =0;a < getSize(); a++){
 		
@@ -54,60 +40,36 @@ void GraphTBB::minimumWeightSpanningTree(){
 		}
 	}
 
-	tbb::parallel_sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
-	
-	
-	int idThread =0;
-	Adjacency *tmp1Adjacency;
-	Adjacency *tmp2Adjacency;
-	
-
+	std::sort(adjacencies.begin(), adjacencies.end(), lessThanKey());
+	Check * checkAdjacencies;
+	checkAdjacencies = new Check();
+	int cont = 0;
+	int i = 0;
+	int anterior = 0;	
 	while(!adjacencies.empty()){
-
-		tmp1Adjacency = new Adjacency(adjacencies.at(0).node1,adjacencies.at(0).node2,adjacencies.at(0).value);
-		checkAdjacencies(tmp1Adjacency,idThread);
-		idThread++;
-		adjacencies.erase(adjacencies.begin());
 		
-		if(!adjacencies.empty()){
-			tmp2Adjacency = new Adjacency(adjacencies.at(0).node1,adjacencies.at(0).node2,adjacencies.at(0).value);
-			int valuePivo = tmp1Adjacency->value;
-			int valueOuther = tmp2Adjacency->value;
-			while(valuePivo == valueOuther){
-				checkAdjacencies(tmp2Adjacency,idThread);
-				idThread++;
+		if(adjacencies.at(i).value == anterior){
+			cont++;
+		} else {
+			parallel_for(blocked_range<size_t>(0, cont), this->checkAdjacencies(* adjacencies, * edges, * minimumAdjacencies, cont));
+			adjacencies = checkAdjacencies.getAdjacency();
+			edges = checkAdjacencies.getEdges();
+			minimumAdjacencies = checkAdjacencies.getMinimumAdjacencies();
+
+
+			anterior = adjacencies.at(i).value;
+			for (j = 0; j <= cont; j++){
 				adjacencies.erase(adjacencies.begin());
-				
-				if(!adjacencies.empty()){
-					tmp2Adjacency = &adjacencies.at(0);
-					valueOuther = tmp2Adjacency->value;
-
-				}else{
-					valueOuther = valuePivo+1;
-				}
 			}
-		}
-	}
-	
-}
-void GraphTBB::checkAdjacencies(Adjacency *tmpAdjacency, int thread){
-	
-	
-	int change;
-	int removePosition;
 
-	if(edges[tmpAdjacency->node1].tree != edges[tmpAdjacency->node2].tree){
-		
-		minimumAdjacencies.push_back(Adjacency(tmpAdjacency->node1,tmpAdjacency->node2,tmpAdjacency->value));
-		change = edges[tmpAdjacency->node2].tree;
-		for(int a=0; a < (int) edges.size(); a++){
-			
-			if(edges[a].tree == change){
-				edges[a].tree = edges[tmpAdjacency->node1].tree;
-			}
 		}
+	i++;
 	}
 }
+
+
+
+
 
 int main(int argc, char* argv[]) {
 
@@ -130,7 +92,6 @@ int main(int argc, char* argv[]) {
 		
 	}
 
-	tbb::task_scheduler_init init(4);
 	graph->openFile(file);
 	graph->printMatrix();
 	graph->minimumWeightSpanningTree();
