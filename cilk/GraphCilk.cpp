@@ -8,9 +8,9 @@
 #include <string>
 #include "../Graph.hpp"
 #include "GraphCilk.hpp"
-#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk_stub.h>
-#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk_api.h>
-#include </opt/intel/composer_xe_2013_sp1.2.144/compiler/include/cilk/cilk.h>
+#include </opt/intel/composer_xe_2013_sp1.3.174/compiler/include/cilk/cilk_stub.h>
+#include </opt/intel/composer_xe_2013_sp1.3.174/compiler/include/cilk/cilk_api.h>
+#include </opt/intel/composer_xe_2013_sp1.3.174/compiler/include/cilk/cilk.h>
 
 using namespace std;
 

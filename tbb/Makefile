@@ -1,5 +1,5 @@
 all:
-	icpc -ltbb GraphTBB.cpp -o tbb ../Graph.cpp
+	icpc -ltbb GraphTBB.cpp -o graphTbb ../Graph.cpp
 	#g++ GraphTBB.cpp ../Graph.cpp -std=c++11 -lpthread -o graphpt
 
 clean:

@@ -134,6 +134,16 @@ int main(int argc, char* argv[]) {
 	graph->setSize(2);
 	graph->inicialize();
 
+	if(argc > 2){
+
+		  
+		tbb::task_scheduler_init init(atoi(argv[2]));
+		cout << "\tThreads:" << argv[2] << endl;
+	}else{
+
+		cout << "\tThreads:" <<  tbb::task_scheduler_init::automatic << endl;
+	}
+
 	if(argc <= 1){
 
 		file = "graphExample.txt";
